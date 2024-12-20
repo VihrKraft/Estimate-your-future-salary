@@ -26,7 +26,8 @@ def get_sj_vacancies(programming_languages):
             response = requests.get(url, headers=headers, params=payload)
             response.raise_for_status()
             vacancies_found = response.json()['total']
-            for vacancy in response.json()['objects']:
+            vacancies = response.json()['objects']
+            for vacancy in vacancies:
                 if vacancy['currency'] == 'rub':
                     salary = predict_salary(vacancy['payment_from'], vacancy['payment_to'])
                     salary_sum = salary_sum+salary

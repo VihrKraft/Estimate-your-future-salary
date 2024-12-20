@@ -19,11 +19,13 @@ def get_hh_vacancies(programming_languages):
                 'per_page': per_page,
             }
             response = requests.get(url, params=payload)
-            if page >= response.json()['pages']-1:
+            pages = response.json()['pages']-1
+            if page >= pages:
                 break
             response.raise_for_status()
             vacancies_found = response.json()['found']
-            for vacancy in response.json()['items']:
+            vacancies = response.json()['items']
+            for vacancy in vacancies:
                 vacancy_salary = vacancy['salary']
                 if vacancy_salary and vacancy_salary['currency'] == 'RUR':
                     salary = predict_salary(vacancy_salary['from'], vacancy_salary['to'])
