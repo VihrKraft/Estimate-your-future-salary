@@ -1,24 +1,26 @@
 import requests
+from itertools import count
 from tools import predict_salary
 
 
 def get_sj_vacancies(programming_languages, secret_key):
     town = 4
-    count = 100
+    per_page = 100
     url = 'https://api.superjob.ru/2.0/vacancies/'
     vacancies_statistic = {}
     for programming_language in programming_languages:
         salary_sum = 0
         vacancies_processed = 0
+        vacancies_found = 0
         headers = {
             'X-Api-App-Id': secret_key,
         }
-        for page in range(5):
+        for page in count(0, 1):
             payload = {
                 'town': town,
                 'keyword': programming_language,
                 'page': page,
-                'count': count,
+                'count': per_page,
             }
             response = requests.get(url, headers=headers, params=payload)
             response.raise_for_status()
@@ -29,6 +31,9 @@ def get_sj_vacancies(programming_languages, secret_key):
                     salary = predict_salary(vacancy['payment_from'], vacancy['payment_to'])
                     salary_sum = salary_sum+salary
                     vacancies_processed += 1
+            more = response.json()['more']
+            if not more:
+                break
         try:
             average_salary = int(salary_sum/vacancies_processed)
         except ZeroDivisionError:
