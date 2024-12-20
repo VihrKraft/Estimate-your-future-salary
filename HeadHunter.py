@@ -30,7 +30,8 @@ def get_hh_vacancies(programming_languages):
                 if vacancy_salary and vacancy_salary['currency'] == 'RUR':
                     salary = predict_salary(vacancy_salary['from'], vacancy_salary['to'])
                     salary_sum = salary_sum+salary
-                    vacancies_processed += 1
+                    if salary != 0:
+                        vacancies_processed += 1
         try:
             average_salary = int(salary_sum/vacancies_processed)
         except ZeroDivisionError:

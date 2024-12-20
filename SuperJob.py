@@ -30,7 +30,8 @@ def get_sj_vacancies(programming_languages, secret_key):
                 if vacancy['currency'] == 'rub':
                     salary = predict_salary(vacancy['payment_from'], vacancy['payment_to'])
                     salary_sum = salary_sum+salary
-                    vacancies_processed += 1
+                    if salary != 0:
+                        vacancies_processed += 1
             more = response.json()['more']
             if not more:
                 break
