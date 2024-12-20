@@ -4,6 +4,8 @@ from itertools import count
 
 
 def get_hh_vacancies(programming_languages):
+    area = 1
+    per_page = 100
     url = 'https://api.hh.ru/vacancies'
     vacancies_statistic = {}
     for programming_language in programming_languages:
@@ -12,9 +14,9 @@ def get_hh_vacancies(programming_languages):
         for page in count(0, 1):
             payload = {
                 'text': programming_language,
-                'area': 1,
+                'area': area,
                 'page': page,
-                'per_page': 100,
+                'per_page': per_page,
             }
             response = requests.get(url, params=payload)
             if page >= response.json()['pages']-1:

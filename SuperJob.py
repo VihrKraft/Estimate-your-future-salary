@@ -6,6 +6,8 @@ from tools import predict_salary
 
 def get_sj_vacancies(programming_languages):
     load_dotenv()
+    town = 4
+    count = 100
     url = 'https://api.superjob.ru/2.0/vacancies/'
     vacancies_statistic = {}
     for programming_language in programming_languages:
@@ -16,10 +18,10 @@ def get_sj_vacancies(programming_languages):
         }
         for page in range(5):
             payload = {
-                'town': 4,
+                'town': town,
                 'keyword': programming_language,
                 'page': page,
-                'count': 100,
+                'count': count,
             }
             response = requests.get(url, headers=headers, params=payload)
             response.raise_for_status()
