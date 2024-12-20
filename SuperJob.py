@@ -1,11 +1,9 @@
 import requests
 import os
-from dotenv import load_dotenv
 from tools import predict_salary
 
 
 def get_sj_vacancies(programming_languages):
-    load_dotenv()
     town = 4
     count = 100
     url = 'https://api.superjob.ru/2.0/vacancies/'

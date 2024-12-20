@@ -1,6 +1,7 @@
 from terminaltables import AsciiTable
 from HeadHunter import get_hh_vacancies
 from SuperJob import get_sj_vacancies
+from dotenv import load_dotenv
 
 def create_job_table(vacancies_statistic):
     table = [
@@ -14,6 +15,7 @@ def create_job_table(vacancies_statistic):
 
 
 def main():
+    load_dotenv()
     programming_languages = ['Python', 'JavaScript', 'Java', 'Ruby:', 'PHP', 'C++', 'C#', 'C']
     vacancies_statistic_hh = get_hh_vacancies(programming_languages)
     create_job_table(vacancies_statistic_hh)
