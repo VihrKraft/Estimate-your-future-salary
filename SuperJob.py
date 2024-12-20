@@ -1,9 +1,8 @@
 import requests
-import os
 from tools import predict_salary
 
 
-def get_sj_vacancies(programming_languages):
+def get_sj_vacancies(programming_languages, secret_key):
     town = 4
     count = 100
     url = 'https://api.superjob.ru/2.0/vacancies/'
@@ -12,7 +11,7 @@ def get_sj_vacancies(programming_languages):
         salary_sum = 0
         vacancies_processed = 0
         headers = {
-            'X-Api-App-Id': os.getenv('SUPERJOB_SECRET_KEY')
+            'X-Api-App-Id': secret_key,
         }
         for page in range(5):
             payload = {
