@@ -2,7 +2,7 @@ from terminaltables import AsciiTable
 from HeadHunter import get_hh_vacancies
 from SuperJob import get_sj_vacancies
 
-def creating_job_table(vacancies_statistic):
+def create_job_table(vacancies_statistic):
     table = [
         ['Язык программирования', 'Вакансий найдено', 'Вакансий обработано', 'Средняя зарплата'],
     ]
@@ -16,9 +16,9 @@ def creating_job_table(vacancies_statistic):
 def main():
     programming_languages = ['Python', 'JavaScript', 'Java', 'Ruby:', 'PHP', 'C++', 'C#', 'C']
     vacancies_statistic_hh = get_hh_vacancies(programming_languages)
-    creating_job_table(vacancies_statistic_hh)
+    create_job_table(vacancies_statistic_hh)
     vacancies_statistic_sj = get_sj_vacancies(programming_languages)
-    creating_job_table(vacancies_statistic_sj)
+    create_job_table(vacancies_statistic_sj)
 
 if __name__ == '__main__':
     main()
